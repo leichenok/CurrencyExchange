@@ -1,0 +1,38 @@
+﻿@model CurrencyExchange.Models.ExchangeModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Currency Exchange";
+}
+<style>
+    .form-exchange {
+        max-width: 300px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+</style>
+
+<div class="form-exchange">
+    @if (Model.IsDataLoaded)
+    {
+        <div class="form-inline" style="padding: inherit;">
+            <input id="txtFrom" class="form-control" style="width:150px;" required min="0" type="number" step="any" placeholder="Amounth" onchange="Site.calculate()" />
+            <div class="form-control" style="width:80px;">CZK</div>
+        </div>
+
+        <div class="form-inline" style="padding: inherit;">
+            <div class="form-control" style="width:150px;" id="txtConvertedAmount"></div>
+            @Html.DropDownList("CurrencyCodes", new SelectList(Model.CurrencyCodes), htmlAttributes: new { @id = "ddlCurrencyCodes", @class = "form-control", @style = "width:80px;", @onchange = "Site.calculate()" })
+        </div>
+    }
+    else
+    {
+        <div class="form-inline" style="padding: inherit; width: 400px;">
+            <h3>Exchange rates wasn't loaded</h3>
+        </div>
+    }
+</div>
+
+
+
